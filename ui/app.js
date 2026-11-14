@@ -329,15 +329,13 @@
     parts.push('<text class="axis-name" x="' + m.l + '" y="' + (m.t - 12) + '">能力</text>');
     parts.push('<text class="axis-name" x="' + (w - m.r) + '" y="' + (m.t + ih - 8) + '" text-anchor="end">价格 · 美元 · 对数</text>');
 
-    // 能力前沿：每一档价格能买到的最强型号
+    // 能力前沿：每一档价格能买到的最强型号，点与点之间用直线连起来
     const byPrice = view.chart.slice().sort((a, b) => a.price - b.price);
     let d = '';
     let peak = -1;
     byPrice.forEach((item) => {
       if (item.score <= peak) return;
-      d += d
-        ? 'H' + X(item.price).toFixed(1) + 'V' + Y(item.score).toFixed(1)
-        : 'M' + X(item.price).toFixed(1) + ',' + Y(item.score).toFixed(1);
+      d += (d ? 'L' : 'M') + X(item.price).toFixed(1) + ',' + Y(item.score).toFixed(1);
       peak = item.score;
     });
 

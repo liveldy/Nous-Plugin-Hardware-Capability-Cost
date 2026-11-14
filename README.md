@@ -1,6 +1,6 @@
 # 能力与成本-硬件
 
-Nous 插件：CPU、GPU 各一页，页内是能力-成本散点图与排行。横轴价格（对数刻度），纵轴能力，绿色阶梯线是当前快照里的能力前沿——每一档价格上买到的最强型号。悬停任一型号，图上与排行里同时亮起。
+Nous 插件：CPU、GPU 各一页，页内是能力-成本散点图与排行。横轴价格（对数刻度），纵轴能力，绿色折线是当前快照里的能力前沿——每一档价格上买到的最强型号，点与点之间直线相连。悬停任一型号，图上与排行里同时亮起。
 
 图表只画能力最高的 100 款，排行列出全部。点上的型号标签按疏密自动取舍：能力高的先放，碰撞就换位置，放不下就不放，所以缩放以后同一片区域能放更多。图表可缩放（− / +、Ctrl/⌘ + 滚轮、双指捏合）、可拖拽平移、可全屏（浏览器全屏，不支持时退回铺满窗口）。普通滚轮仍然滚动页面。
 
@@ -24,16 +24,16 @@ node tools/snapshot.mjs --url https://你的数据源/snapshot.json
 
 ## 发行
 
-发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.1.1/app.nous.hardware-cost-1.1.1.nous-plugin.json>
+发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.1.2/app.nous.hardware-cost-1.1.2.nous-plugin.json>
 
-SHA-256：`cf44a31142ed9818799351eabd5f501620e457cf59a6733fc6fdad7d10302aaf`
+SHA-256：`c00f81f5b9dfb118b15b429d7a083b1aa5ffbecfd5656e24cd8309a5ab8d3fba`
 
 ## 命令
 
 ```sh
 node sdk/dev.mjs .            # 本机模拟宿主，浏览器打开 http://127.0.0.1:8088/
 node sdk/check.mjs .          # 协议、权限、方法、资源预检
-node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.1.1.nous-plugin.json
+node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.1.2.nous-plugin.json
 node tools/snapshot.mjs       # 重新生成快照（--from、--url、--date 可选）
 ```
 

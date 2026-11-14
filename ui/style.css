@@ -4,7 +4,7 @@
 }
 
 :root{
-  --p-bg:#ffffff; --p-surface:#f2f2f0; --p-board:#a8a8aa;
+  --p-bg:#ffffff; --p-surface:#f2f2f0; --p-board:#ffffff;
   --p-ink:#101010; --p-muted:#4a4b4f;
   --p-accent:#1f5c49; --p-accent-ink:#ffffff; --p-action:#1f5c49; --p-action-ink:#ffffff;
   --p-inv-bg:#1b1b1c; --p-inv-surface:#232324; --p-inv-ink:#a8a8aa; --p-inv-muted:#8c8c8e;
@@ -20,7 +20,7 @@
 
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --p-bg:#1b1b1c; --p-surface:#262628; --p-board:#262628; --p-ink:#f2f1ee; --p-muted:#a6a6a8;
+  --p-bg:#1b1b1c; --p-surface:#262628; --p-board:#1b1b1c; --p-ink:#f2f1ee; --p-muted:#a6a6a8;
   --p-accent:#6cb096; --p-action:#6cb096; --p-accent-ink:#141414; --p-action-ink:#141414;
   --rule:rgba(242,241,238,.16); --hair:rgba(242,241,238,.30); --grid:rgba(242,241,238,.14);
 }
