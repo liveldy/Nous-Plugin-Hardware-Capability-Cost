@@ -69,7 +69,7 @@ h1{
   fill:var(--p-ink);opacity:.82;cursor:pointer;
   transform-box:fill-box;transform-origin:center;
   transition:opacity .16s ease,fill .16s ease,transform .16s ease;
-  animation:dotin .5s ease both;animation-delay:calc(var(--i) * 14ms + 140ms);
+  animation:dotin .5s ease backwards;animation-delay:calc(var(--i) * 14ms + 140ms);
 }
 .dot.is-hot{fill:var(--p-accent);opacity:1;transform:scale(1.5)}
 .ring{fill:none;stroke:var(--p-accent);stroke-width:1;opacity:.9}
@@ -168,9 +168,9 @@ th.c-name{cursor:default}
 /* entrance ----------------------------------------------------------- */
 @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 @keyframes dotin{from{opacity:0}to{opacity:.8}}
-main.in .hero-text{animation:rise .5s cubic-bezier(.2,.7,.3,1) both}
-main.in .plot{animation:rise .55s cubic-bezier(.2,.7,.3,1) .06s both}
-main.in .board{animation:rise .55s cubic-bezier(.2,.7,.3,1) .12s both}
+main.in .hero-text{animation:rise .5s cubic-bezier(.2,.7,.3,1) backwards}
+main.in .plot{animation:rise .55s cubic-bezier(.2,.7,.3,1) .06s backwards}
+main.in .board{animation:rise .55s cubic-bezier(.2,.7,.3,1) .12s backwards}
 
 @media (max-width:640px){
   :root{--gut:18px}

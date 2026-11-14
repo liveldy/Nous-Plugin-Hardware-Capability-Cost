@@ -24,16 +24,16 @@ node tools/snapshot.mjs --url https://你的数据源/snapshot.json
 
 ## 发行
 
-发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.1.0/app.nous.hardware-cost-1.1.0.nous-plugin.json>
+发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.1.1/app.nous.hardware-cost-1.1.1.nous-plugin.json>
 
-SHA-256：`d8fae778cf4b3d436757a7f6935a6840258d8edf88a6f8a600a0721259c1f7b6`
+SHA-256：`cf44a31142ed9818799351eabd5f501620e457cf59a6733fc6fdad7d10302aaf`
 
 ## 命令
 
 ```sh
 node sdk/dev.mjs .            # 本机模拟宿主，浏览器打开 http://127.0.0.1:8088/
 node sdk/check.mjs .          # 协议、权限、方法、资源预检
-node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.1.0.nous-plugin.json
+node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.1.1.nous-plugin.json
 node tools/snapshot.mjs       # 重新生成快照（--from、--url、--date 可选）
 ```
 
