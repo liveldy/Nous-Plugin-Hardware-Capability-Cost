@@ -25,12 +25,6 @@
         </p>
         <div class="plot" id="plot">
           <div class="plot__tools" role="group" aria-label="图表视图">
-            <button type="button" class="tool" data-act="out" aria-label="缩小">
-              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg>
-            </button>
-            <button type="button" class="tool" data-act="in" aria-label="放大">
-              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10"/></svg>
-            </button>
             <button type="button" class="tool" data-act="reset" aria-label="复位" hidden>
               <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.2 8.6A5.2 5.2 0 1 1 11.4 4"/><path d="M13.4 2v3h-3"/></svg>
             </button>
@@ -62,6 +56,8 @@
           <tr>
             <th scope="col" class="c-rank">#</th>
             <th scope="col" class="c-name">型号</th>
+            <th scope="col" class="c-vendor">厂商 / CEO</th>
+            <th scope="col" class="c-country">国家</th>
             <th scope="col" class="c-spec" id="spec-head">核心</th>
             <th scope="col" class="c-num">能力</th>
             <th scope="col" class="c-num">价格</th>
@@ -82,6 +78,7 @@
 </main>
 <script src="nous-plugin.js"></script>
 <script src="data.js"></script>
+<script src="vendors.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 
 Nous 插件：CPU、GPU 各一页，页内是能力-成本散点图与排行。横轴价格（对数刻度），纵轴能力，绿色折线是当前快照里的能力前沿——每一档价格上买到的最强型号，点与点之间直线相连。悬停任一型号，图上与排行里同时亮起。
 
-图表只画能力最高的 100 款，排行列出全部。点上的型号标签按疏密自动取舍：能力高的先放，碰撞就换位置，放不下就不放，所以缩放以后同一片区域能放更多。图表可缩放（− / +、Ctrl/⌘ + 滚轮、双指捏合）、可拖拽平移、可全屏（浏览器全屏，不支持时退回铺满窗口）。普通滚轮仍然滚动页面。
+图表只画能力最高的 100 款，排行列出全部，并列厂商与 CEO、国家（旗帜）以及型号前的品牌标记。点上的型号标签按疏密自动取舍：能力高的先放，碰撞就换位置，放不下就不放，所以缩放以后同一片区域能放更多。图表用滚轮或双指捏合缩放、拖拽平移、可全屏（浏览器全屏，不支持时退回铺满窗口）；缩放放到头以后滚轮照常滚动页面，拖动到全图时竖向拖动也是滚页面。
 
 ## 数据快照
 
@@ -24,16 +24,16 @@ node tools/snapshot.mjs --url https://你的数据源/snapshot.json
 
 ## 发行
 
-发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.1.2/app.nous.hardware-cost-1.1.2.nous-plugin.json>
+发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.2.0/app.nous.hardware-cost-1.2.0.nous-plugin.json>
 
-SHA-256：`c00f81f5b9dfb118b15b429d7a083b1aa5ffbecfd5656e24cd8309a5ab8d3fba`
+SHA-256：`14620fa874db665478459bbd2434940cd8bee5c973f1993b5fb0c26fcf3d663f`
 
 ## 命令
 
 ```sh
 node sdk/dev.mjs .            # 本机模拟宿主，浏览器打开 http://127.0.0.1:8088/
 node sdk/check.mjs .          # 协议、权限、方法、资源预检
-node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.1.2.nous-plugin.json
+node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.2.0.nous-plugin.json
 node tools/snapshot.mjs       # 重新生成快照（--from、--url、--date 可选）
 ```
 
@@ -45,6 +45,7 @@ ui/index.html            页面骨架：标题、图、排行、快照栏
 ui/style.css             设计令牌与样式（Archivo，随包字体）
 ui/app.js                渲染图表（缩放/全屏/智能标注）、排行、悬停联动、快照导入
 ui/data.js              快照（由 tools/snapshot.mjs 生成，勿手改）
+ui/vendors.js           品牌标记（Simple Icons, CC0）、厂商与 CEO、国旗
 ui/nous-plugin.js        宿主页面 SDK（MIT）
 ui/fonts/                Archivo latin 子集与 OFL 许可
 tools/snapshot.mjs       快照生成器
@@ -62,4 +63,4 @@ tools/reference-scores.json  离线参考表
 - 闸门最后剩下 5 条按落地页写的规则，按"判断为误报"豁免，理由写在 `.taste-skill/waivers.json`：排行榜不需要配图（no-visual）、数据视图没有转化按钮（cta）、入场由页面 CSS 负责而非随包 motion.js（hero-enter）、图表本身即这一版的举动（moment-none）、104 行排行不做整屏裁切（section-height）。
 - 未验证：真实 Nous 客户端内的导航与账户存储（需要安装后手动走一遍），以及导入快照的端到端流程（只在浏览器里验证过解析与渲染）。
 
-数据是参考值，不是实测；发布前需要接入有授权的数据源并确认价格口径。
+数据是参考值，不是实测；发布前需要接入有授权的数据源并确认价格口径。品牌标记取自 Simple Icons（CC0），商标归各公司；CEO 为 2026 年 11 月在职者，换人时改 `ui/vendors.js` 一行即可。

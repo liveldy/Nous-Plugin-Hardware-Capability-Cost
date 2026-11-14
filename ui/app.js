@@ -16,6 +16,10 @@
   const calm = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const TITLES = { cpu: 'CPU', gpu: 'GPU' };
+  const VENDORS = window.NOUS_VENDORS || {};
+  const BRANDS = window.NOUS_BRANDS || {};
+  const FLAGS = window.NOUS_FLAGS || {};
+  const vendorOf = (brand) => VENDORS[String(brand || '').toLowerCase()] || null;
   const SORTS = { score: '能力', price: '价格', value: '性价比' };
   const MAX_POINTS = 100;
 
@@ -28,7 +32,8 @@
     rect: null,
     timer: 0,
     frame: 0,
-    faux: false
+    faux: false,
+    enter: true
   };
   const els = {
     main: $('main'),
@@ -64,6 +69,7 @@
       .map((item) => ({
         id: String(item.id || item.name),
         name: String(item.name || ''),
+        brand: String(item.brand || ''),
         spec: String(item.spec || ''),
         score: Number(item.score),
         price: Number(item.price)
@@ -122,6 +128,7 @@
     state.prepared = view;
     state.domain = view.domain;
     state.rect = Object.assign({}, view.domain);
+    state.enter = true;
     document.documentElement.dataset.view = state.view;
 
     els.title.textContent = TITLES[state.view];
@@ -156,10 +163,23 @@
     els.rows.innerHTML = list
       .map((item, i) => {
         const width = Math.max(2, (item.value / view.maxValue) * 100).toFixed(1);
+        const key = String(item.brand || '').toLowerCase();
+        const vendor = vendorOf(item.brand);
+        const logo = BRANDS[key];
+        const flag = vendor && FLAGS[vendor.country];
         return (
           '<tr data-id="' + esc(item.id) + '">' +
           '<td class="c-rank">' + (i + 1) + '</td>' +
-          '<td class="c-name">' + esc(item.name) + '</td>' +
+          '<td class="c-name">' +
+          (logo ? '<span class="brand" aria-hidden="true">' + logo + '</span>' : '') +
+          esc(item.name) + '</td>' +
+          '<td class="c-vendor">' + esc(vendor ? vendor.name : item.brand) +
+          (vendor && vendor.ceo ? '<span class="ceo">' + esc(vendor.ceo) + '</span>' : '') + '</td>' +
+          '<td class="c-country">' +
+          (flag
+            ? '<span class="flag" role="img" aria-label="' + esc(vendor.place) + '" title="' + esc(vendor.place) + '">' + flag + '</span>'
+            : esc(vendor ? vendor.place : '')) +
+          '</td>' +
           '<td class="c-spec">' + esc(item.spec) + '</td>' +
           '<td class="c-num">' + fScore(item.score) + '</td>' +
           '<td class="c-num">' + fPrice(item.price) + '</td>' +
@@ -353,7 +373,9 @@
     const labels = placeLabels(view.chart, sc, w, w < 560 ? 8 : 40);
     parts.push('<g class="dot-labels">' + labels.map((l) => '<text x="' + l.x.toFixed(1) + '" y="' + l.y.toFixed(1) + '">' + esc(l.text) + '</text>').join('') + '</g>');
 
+    svg.classList.toggle('enter', state.enter);
     svg.innerHTML = parts.join('');
+    state.enter = false;
 
     const front = svg.querySelector('.front');
     if (front && !calm() && state.zoomPulse !== false) {
@@ -392,19 +414,24 @@
     const cx = sc.px2x(px);
     const cy = sc.py2y(py);
     const r = state.rect;
+    const f = state.domain;
+    const w = r.x1 - r.x0;
+    const h = r.y1 - r.y0;
+    const nw = Math.min(Math.max(w / factor, (f.x1 - f.x0) / 40), f.x1 - f.x0);
+    const nh = Math.min(Math.max(h / factor, (f.y1 - f.y0) / 40), f.y1 - f.y0);
+    // 已经放到头了：不做任何事，把滚轮还给页面
+    if (Math.abs(nw - w) < 1e-12 && Math.abs(nh - h) < 1e-12) return false;
+    const kx = nw / w;
+    const ky = nh / h;
     state.rect = clampRect({
-      x0: cx - (cx - r.x0) / factor,
-      x1: cx + (r.x1 - cx) / factor,
-      y0: cy - (cy - r.y0) / factor,
-      y1: cy + (r.y1 - cy) / factor
+      x0: cx - (cx - r.x0) * kx,
+      x1: cx + (r.x1 - cx) * kx,
+      y0: cy - (cy - r.y0) * ky,
+      y1: cy + (r.y1 - cy) * ky
     });
     syncTools();
     scheduleDraw();
-  }
-
-  function zoomCenter(factor) {
-    const box = els.chart.getBoundingClientRect();
-    zoomAt(box.width / 2, box.height / 2, factor);
+    return true;
   }
 
   function resetZoom() {
@@ -425,15 +452,15 @@
     els.plot.classList.toggle('is-zoomed', zoomed());
   }
 
-  // 普通滚轮留给页面滚动；Ctrl/⌘ + 滚轮（含触控板双指缩放）缩放图表
+  // 滚轮缩放；已经放到头时不再拦截，滚轮照常滚动页面
   els.chart.addEventListener(
     'wheel',
     (event) => {
-      if (!event.ctrlKey && !event.metaKey) return;
-      event.preventDefault();
       const box = els.chart.getBoundingClientRect();
-      const factor = Math.exp(-event.deltaY * (event.deltaMode === 1 ? 0.03 : 0.0022));
-      zoomAt(event.clientX - box.left, event.clientY - box.top, Math.min(2.5, Math.max(0.4, factor)));
+      const unit = event.deltaMode === 1 ? 0.03 : event.deltaMode === 2 ? 0.6 : 0.0022;
+      const factor = Math.min(2.5, Math.max(0.4, Math.exp(-event.deltaY * unit)));
+      if (!zoomAt(event.clientX - box.left, event.clientY - box.top, factor)) return;
+      event.preventDefault();
     },
     { passive: false }
   );
@@ -487,6 +514,12 @@
     const dy = event.clientY - drag.y;
     if (Math.abs(dx) + Math.abs(dy) > 3) drag.moved = true;
     if (!drag.moved) return;
+    if (event.pointerType === 'touch' && !zoomed() && Math.abs(dy) > Math.abs(dx)) {
+      window.scrollBy(0, -dy);
+      drag.x = event.clientX;
+      drag.y = event.clientY;
+      return;
+    }
     const box = els.chart.getBoundingClientRect();
     const sc = scale(Math.round(box.width), Math.round(box.height));
     const perX = ((drag.rect.x1 - drag.rect.x0) / sc.iw) * dx;
@@ -570,9 +603,7 @@
     const button = event.target.closest('.tool');
     if (!button) return;
     const act = button.dataset.act;
-    if (act === 'in') zoomCenter(1.6);
-    else if (act === 'out') zoomCenter(1 / 1.6);
-    else if (act === 'reset') resetZoom();
+    if (act === 'reset') resetZoom();
     else if (act === 'full') toggleFull();
   });
 
