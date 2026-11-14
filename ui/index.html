@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>能力与成本 · 硬件</title>
+<meta name="description" content="用能力-成本图和排行对比 CPU、GPU 的每美元性能。">
+<meta property="og:title" content="能力与成本 · 硬件">
+<meta property="og:description" content="用能力-成本图和排行对比 CPU、GPU 的每美元性能。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#a8a8aa">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWY1YzQ5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNCA0djE2aDE2Ii8+PGNpcmNsZSBjeD0iOSIgY3k9IjE1IiByPSIxLjYiIGZpbGw9IiMxZjVjNDkiIHN0cm9rZT0ibm9uZSIvPjxjaXJjbGUgY3g9IjEyLjUiIGN5PSIxMSIgcj0iMS42IiBmaWxsPSIjMWY1YzQ5IiBzdHJva2U9Im5vbmUiLz48Y2lyY2xlIGN4PSIxNyIgY3k9IjgiIHI9IjEuNiIgZmlsbD0iIzFmNWM0OSIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTYuNiAxNi42SDlNOSAxNi42di0xLjYiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9zdmc+">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="main">
+  <section class="hero" id="top" data-enter>
+    <div class="wrap">
+      <div class="hero-text">
+        <h1 id="title">CPU</h1>
+        <p class="head__meta">
+          <span id="metric">Cinebench R23 多核</span>
+          <span id="count">26 款</span>
+        </p>
+        <div class="plot" id="plot">
+          <svg id="chart" role="img" aria-label="价格与能力分布图"></svg>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="board" id="board">
+    <div class="wrap">
+      <div class="board__bar">
+        <h2>排行</h2>
+        <div class="sort" role="group" aria-label="排序方式">
+          <button type="button" data-sort="score" aria-pressed="true">能力</button>
+          <button type="button" data-sort="price" aria-pressed="false">价格</button>
+          <button type="button" data-sort="value" aria-pressed="false">性价比</button>
+        </div>
+      </div>
+      <table id="board-table">
+        <caption class="vh" id="caption">按能力排行</caption>
+        <thead>
+          <tr>
+            <th scope="col" class="c-rank">#</th>
+            <th scope="col" class="c-name">型号</th>
+            <th scope="col" class="c-spec" id="spec-head">核心</th>
+            <th scope="col" class="c-num">能力</th>
+            <th scope="col" class="c-num">价格</th>
+            <th scope="col" class="c-val">每美元</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <div class="snap">
+        <p id="snap-line">快照</p>
+        <button type="button" class="btn" id="import">导入快照</button>
+        <input type="file" id="file" accept=".json,application/json" hidden>
+        <p class="snap__status" id="status" role="status"></p>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="nous-plugin.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

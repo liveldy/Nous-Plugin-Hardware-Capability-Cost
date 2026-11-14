@@ -1,0 +1,56 @@
+# 能力与成本-硬件
+
+Nous 插件：CPU、GPU 各一页，页内是能力-成本散点图与排行。横轴价格，纵轴能力，绿色阶梯线是当前快照里的能力前沿——每一档价格上买到的最强型号。悬停任一型号，图上与排行里同时亮起。
+
+## 数据快照
+
+插件页面在宿主 iframe 里不联网，所以能力与价格不是打开时去抓的，而是随包携带一份**快照**（`ui/data.js`）。快照按天刷新：
+
+1. `tools/snapshot.mjs` 读取上游数据，校验、排序、加上生成时间，写出 `ui/data.js`；
+2. 定时任务每天跑一次，然后重新打包发布；
+3. 用户安装或更新后，打开插件看到的就是最近一次快照。
+
+页面右下角显示快照日期，也可以点「导入快照」手动载入一份 JSON（存进当前账户的插件存储，换账户互不影响）。
+
+当前仓库内的快照来自 `tools/reference-scores.json`：CPU 用 Cinebench R23 多核，GPU 用 3DMark Time Spy 图形分，价格为首发建议零售价（美元）。其中一部分是社区参考值（`"ref": true`）。正式发布前应换成有授权的数据源：
+
+```sh
+node tools/snapshot.mjs --url https://你的数据源/snapshot.json
+```
+
+上游 JSON 的形状与 `tools/reference-scores.json` 相同：`{cpu:{metric,spec,items:[{name,brand,spec,score,price,ref?}]}, gpu:{…}}`。
+
+## 命令
+
+```sh
+node sdk/dev.mjs .            # 本机模拟宿主，浏览器打开 http://127.0.0.1:8088/
+node sdk/check.mjs .          # 协议、权限、方法、资源预检
+node sdk/pack.mjs .           # 生成 dist/app.nous.hardware-cost-1.0.0.nous-plugin.json
+node tools/snapshot.mjs       # 重新生成快照（--from、--url、--date 可选）
+```
+
+## 结构
+
+```
+manifest.json            插件清单（Plugin Interface 1.3，需要 Nous 1.2.0+）
+ui/index.html            页面骨架：标题、图、排行、快照栏
+ui/style.css             设计令牌与样式（Archivo，随包字体）
+ui/app.js                渲染图表、排行、悬停联动、快照导入
+ui/data.js              快照（由 tools/snapshot.mjs 生成，勿手改）
+ui/nous-plugin.js        宿主页面 SDK（MIT）
+ui/fonts/                Archivo latin 子集与 OFL 许可
+tools/snapshot.mjs       快照生成器
+tools/reference-scores.json  离线参考表
+.github/workflows/snapshot.yml  每日刷新任务
+```
+
+权限只有 `storage`：保存导入的快照，按账户隔离。没有原生模块，网页、Windows、Android 用同一份页面。
+
+## 验证
+
+- `node sdk/check.mjs .`：三个平台的协议、权限、必需方法、资源检查通过。
+- `node sdk/pack.mjs .`：打包通过，资源与摘要见打包输出。
+- taste-skill 检查：`copy-lint` 0 FAIL 0 WARN；1440/1024/820/768/390 截图逐张看过；一致性检查的 FAIL 均为落地页规则（hero、整屏分节、产品图），查看 `.taste-skill/waivers.json` 的说明。
+- 未验证：真实 Nous 客户端内的导航与账户存储（需要安装后手动走一遍），以及导入快照的端到端流程（只在浏览器里验证过解析与渲染）。
+
+数据是参考值，不是实测；发布前需要接入有授权的数据源并确认价格口径。

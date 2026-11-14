@@ -1,0 +1,59 @@
+{
+  "id": "app.nous.hardware-cost",
+  "name": "能力与成本-硬件",
+  "version": "1.0.0",
+  "api": "1.3",
+  "requiresHost": "1.2.0",
+  "description": "CPU 与 GPU 的能力-成本图和排行，看每美元买到多少性能。",
+  "platforms": [
+    "web",
+    "windows-x64",
+    "android-arm64"
+  ],
+  "permissions": [
+    "storage"
+  ],
+  "entry": "ui/index.html",
+  "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWY1YzQ5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNCA0djE2aDE2Ii8+PGNpcmNsZSBjeD0iOSIgY3k9IjE1IiByPSIxLjYiIGZpbGw9IiMxZjVjNDkiIHN0cm9rZT0ibm9uZSIvPjxjaXJjbGUgY3g9IjEyLjUiIGN5PSIxMSIgcj0iMS42IiBmaWxsPSIjMWY1YzQ5IiBzdHJva2U9Im5vbmUiLz48Y2lyY2xlIGN4PSIxNyIgY3k9IjgiIHI9IjEuNiIgZmlsbD0iIzFmNWM0OSIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTYuNiAxNi42SDlNOSAxNi42di0xLjYiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9zdmc+",
+  "repository": "liveldy/Nous-Plugin-Hardware-Capability-Cost",
+  "license": "MIT",
+  "navigation": [
+    {
+      "id": "cpu",
+      "label": "CPU",
+      "icon": "cpu"
+    },
+    {
+      "id": "gpu",
+      "label": "GPU",
+      "icon": "gpu"
+    }
+  ],
+  "defaultView": "cpu",
+  "requiredMethods": [
+    "storage.get",
+    "storage.set"
+  ],
+  "optionalMethods": [],
+  "resources": [
+    "ui/index.html",
+    "ui/style.css",
+    "ui/app.js",
+    "ui/data.js",
+    "ui/nous-plugin.js"
+  ],
+  "author": {
+    "name": "liveldy",
+    "url": "https://github.com/liveldy"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "publishedAt": "2026-11-14",
+      "changes": [
+        "首个版本：CPU、GPU 各自一页，能力-成本图、排行与快照导入。",
+        "随包携带离线快照，tools/snapshot.mjs 与定时任务每天刷新；页面不联网，读取最近一次快照。"
+      ]
+    }
+  ]
+}

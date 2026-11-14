@@ -1,0 +1,60 @@
+{
+  "schema": "hardware-snapshot/1",
+  "note": "离线参考表：能力分为公开测试的参考值，价格为首发建议零售价（美元）。正式发布前应接入有授权的数据源并以 tools/snapshot.mjs 每日刷新。",
+  "cpu": {
+    "metric": "Cinebench R23 多核",
+    "spec": "核心",
+    "items": [
+      { "name": "Ryzen 9 9950X3D", "brand": "AMD", "spec": "16", "score": 44500, "price": 699, "ref": true },
+      { "name": "Ryzen 9 9950X", "brand": "AMD", "spec": "16", "score": 42800, "price": 649, "ref": true },
+      { "name": "Core Ultra 9 285K", "brand": "Intel", "spec": "24", "score": 42100, "price": 589, "ref": true },
+      { "name": "Core i9-13900K", "brand": "Intel", "spec": "24", "score": 41012, "price": 589 },
+      { "name": "Core i9-14900K", "brand": "Intel", "spec": "24", "score": 38497, "price": 589 },
+      { "name": "Ryzen 9 7950X", "brand": "AMD", "spec": "16", "score": 38165, "price": 699 },
+      { "name": "Core Ultra 7 265K", "brand": "Intel", "spec": "20", "score": 36000, "price": 394, "ref": true },
+      { "name": "Core i7-13700K", "brand": "Intel", "spec": "16", "score": 31069, "price": 409 },
+      { "name": "Ryzen 9 7900X", "brand": "AMD", "spec": "12", "score": 29358, "price": 549 },
+      { "name": "Ryzen 9 5950X", "brand": "AMD", "spec": "16", "score": 28782, "price": 799 },
+      { "name": "Core i9-12900K", "brand": "Intel", "spec": "16", "score": 27483, "price": 589 },
+      { "name": "Core Ultra 5 245K", "brand": "Intel", "spec": "14", "score": 26500, "price": 309, "ref": true },
+      { "name": "Core i5-13600K", "brand": "Intel", "spec": "14", "score": 24528, "price": 319 },
+      { "name": "Core i7-12700K", "brand": "Intel", "spec": "12", "score": 23488, "price": 409 },
+      { "name": "Ryzen 7 9800X3D", "brand": "AMD", "spec": "8", "score": 23300, "price": 479, "ref": true },
+      { "name": "Ryzen 9 5900X", "brand": "AMD", "spec": "12", "score": 22046, "price": 549 },
+      { "name": "Ryzen 7 7700X", "brand": "AMD", "spec": "8", "score": 19910, "price": 399 },
+      { "name": "Ryzen 7 7800X3D", "brand": "AMD", "spec": "8", "score": 17762, "price": 449 },
+      { "name": "Core i5-12600K", "brand": "Intel", "spec": "10", "score": 17660, "price": 289 },
+      { "name": "Ryzen 7 5800X", "brand": "AMD", "spec": "8", "score": 15228, "price": 449 },
+      { "name": "Ryzen 5 7600X", "brand": "AMD", "spec": "6", "score": 15204, "price": 299 },
+      { "name": "Ryzen 7 5700G", "brand": "AMD", "spec": "8", "score": 14350, "price": 359 },
+      { "name": "Core i5-12400", "brand": "Intel", "spec": "6", "score": 12344, "price": 192 },
+      { "name": "Ryzen 5 5600", "brand": "AMD", "spec": "6", "score": 11429, "price": 199 },
+      { "name": "Core i5-11600K", "brand": "Intel", "spec": "6", "score": 11277, "price": 262 },
+      { "name": "Ryzen 5 5600X", "brand": "AMD", "spec": "6", "score": 11201, "price": 299 }
+    ]
+  },
+  "gpu": {
+    "metric": "3DMark Time Spy 图形分",
+    "spec": "显存",
+    "items": [
+      { "name": "GeForce RTX 5090", "brand": "NVIDIA", "spec": "32 GB", "score": 48000, "price": 1999, "ref": true },
+      { "name": "GeForce RTX 4090", "brand": "NVIDIA", "spec": "24 GB", "score": 36000, "price": 1599, "ref": true },
+      { "name": "GeForce RTX 5080", "brand": "NVIDIA", "spec": "16 GB", "score": 32000, "price": 999, "ref": true },
+      { "name": "GeForce RTX 4080 Super", "brand": "NVIDIA", "spec": "16 GB", "score": 28500, "price": 999, "ref": true },
+      { "name": "Radeon RX 9070 XT", "brand": "AMD", "spec": "16 GB", "score": 28000, "price": 599, "ref": true },
+      { "name": "Radeon RX 7900 XTX", "brand": "AMD", "spec": "24 GB", "score": 28000, "price": 999, "ref": true },
+      { "name": "GeForce RTX 5070 Ti", "brand": "NVIDIA", "spec": "16 GB", "score": 27500, "price": 749, "ref": true },
+      { "name": "Radeon RX 9070", "brand": "AMD", "spec": "16 GB", "score": 24500, "price": 549, "ref": true },
+      { "name": "GeForce RTX 4070 Ti Super", "brand": "NVIDIA", "spec": "16 GB", "score": 24000, "price": 799, "ref": true },
+      { "name": "GeForce RTX 5070", "brand": "NVIDIA", "spec": "12 GB", "score": 21000, "price": 549, "ref": true },
+      { "name": "GeForce RTX 4070 Super", "brand": "NVIDIA", "spec": "12 GB", "score": 20500, "price": 599, "ref": true },
+      { "name": "Radeon RX 7800 XT", "brand": "AMD", "spec": "16 GB", "score": 19000, "price": 499, "ref": true },
+      { "name": "GeForce RTX 5060 Ti", "brand": "NVIDIA", "spec": "16 GB", "score": 16500, "price": 429, "ref": true },
+      { "name": "Arc B580", "brand": "Intel", "spec": "12 GB", "score": 14000, "price": 249, "ref": true },
+      { "name": "GeForce RTX 4060 Ti", "brand": "NVIDIA", "spec": "16 GB", "score": 13500, "price": 449, "ref": true },
+      { "name": "Arc A750", "brand": "Intel", "spec": "8 GB", "score": 11000, "price": 249, "ref": true },
+      { "name": "GeForce RTX 4060", "brand": "NVIDIA", "spec": "8 GB", "score": 10800, "price": 299, "ref": true },
+      { "name": "Radeon RX 7600", "brand": "AMD", "spec": "8 GB", "score": 10500, "price": 269, "ref": true }
+    ]
+  }
+}

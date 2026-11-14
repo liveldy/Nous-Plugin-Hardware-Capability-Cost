@@ -1,0 +1,53 @@
+name: 每日快照
+
+# 插件页面不联网，所以"每天更新"发生在构建期：抓一次上游数据，写进 ui/data.js，
+# 打包成新的 .nous-plugin.json 并作为 Release 资源发布。
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: 生成快照
+        env:
+          SNAPSHOT_URL: ${{ vars.SNAPSHOT_URL }}
+        run: |
+          if [ -n "$SNAPSHOT_URL" ]; then
+            node tools/snapshot.mjs --url "$SNAPSHOT_URL"
+          else
+            echo "没有配置 SNAPSHOT_URL，沿用 tools/reference-scores.json"
+            node tools/snapshot.mjs
+          fi
+
+      - name: 预检与打包
+        run: |
+          node sdk/check.mjs .
+          node sdk/pack.mjs .
+
+      - name: 发布
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="snapshot-$(date -u +%Y%m%d)"
+          gh release create "$TAG" dist/*.nous-plugin.json \
+            --title "快照 $(date -u +%F)" --notes "每日快照：能力与成本数据刷新。" \
+          || gh release upload "$TAG" dist/*.nous-plugin.json --clobber
+
+      - name: 提交快照
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add ui/data.js
+          git diff --cached --quiet || git commit -m "chore: 每日快照 $(date -u +%F)"
+          git push
