@@ -20,6 +20,12 @@ node tools/snapshot.mjs --url https://你的数据源/snapshot.json
 
 上游 JSON 的形状与 `tools/reference-scores.json` 相同：`{cpu:{metric,spec,items:[{name,brand,spec,score,price,ref?}]}, gpu:{…}}`。
 
+## 发行
+
+发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.0.0/app.nous.hardware-cost-1.0.0.nous-plugin.json>
+
+SHA-256：`e42c7fb5ae99cd582a719aaed3750e58ac93e6c6fd9dded43ed45bfcbd969b0d`
+
 ## 命令
 
 ```sh
@@ -50,7 +56,8 @@ tools/reference-scores.json  离线参考表
 
 - `node sdk/check.mjs .`：三个平台的协议、权限、必需方法、资源检查通过。
 - `node sdk/pack.mjs .`：打包通过，资源与摘要见打包输出。
-- taste-skill 检查：`copy-lint` 0 FAIL 0 WARN；1440/1024/820/768/390 截图逐张看过；一致性检查的 FAIL 均为落地页规则（hero、整屏分节、产品图），查看 `.taste-skill/waivers.json` 的说明。
+- taste-skill：`copy-lint` 0 FAIL 0 WARN；`perf` PASS；完成度闸门 `GATE: PASS`；1440/1024/768/390 截图逐张看过。
+- 闸门最后剩下 5 条按落地页写的规则，按"判断为误报"豁免，理由写在 `.taste-skill/waivers.json`：排行榜不需要配图（no-visual）、数据视图没有转化按钮（cta）、入场由页面 CSS 负责而非随包 motion.js（hero-enter）、图表本身即这一版的举动（moment-none）、26 行排行不做整屏裁切（section-height）。
 - 未验证：真实 Nous 客户端内的导航与账户存储（需要安装后手动走一遍），以及导入快照的端到端流程（只在浏览器里验证过解析与渲染）。
 
 数据是参考值，不是实测；发布前需要接入有授权的数据源并确认价格口径。
