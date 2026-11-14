@@ -26,7 +26,7 @@ node tools/snapshot.mjs --url https://你的数据源/snapshot.json
 
 发行包：<https://github.com/liveldy/Nous-Plugin-Hardware-Capability-Cost/releases/download/v1.1.0/app.nous.hardware-cost-1.1.0.nous-plugin.json>
 
-SHA-256：`SHA_PLACEHOLDER`
+SHA-256：`d8fae778cf4b3d436757a7f6935a6840258d8edf88a6f8a600a0721259c1f7b6`
 
 ## 命令
 
