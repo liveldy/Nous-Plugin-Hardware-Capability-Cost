@@ -9,7 +9,7 @@
 <meta property="og:description" content="用能力-成本图和排行对比 CPU、GPU 的每美元性能。">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#a8a8aa">
+<meta name="theme-color" content="#ffffff">
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMWY1YzQ5IiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNNCA0djE2aDE2Ii8+PGNpcmNsZSBjeD0iOSIgY3k9IjE1IiByPSIxLjYiIGZpbGw9IiMxZjVjNDkiIHN0cm9rZT0ibm9uZSIvPjxjaXJjbGUgY3g9IjEyLjUiIGN5PSIxMSIgcj0iMS42IiBmaWxsPSIjMWY1YzQ5IiBzdHJva2U9Im5vbmUiLz48Y2lyY2xlIGN4PSIxNyIgY3k9IjgiIHI9IjEuNiIgZmlsbD0iIzFmNWM0OSIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTYuNiAxNi42SDlNOSAxNi42di0xLjYiIHN0cm9rZS13aWR0aD0iMS4yIi8+PC9zdmc+">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -21,9 +21,24 @@
         <h1 id="title">CPU</h1>
         <p class="head__meta">
           <span id="metric">Cinebench R23 多核</span>
-          <span id="count">26 款</span>
+          <span id="count">104 款</span>
         </p>
         <div class="plot" id="plot">
+          <div class="plot__tools" role="group" aria-label="图表视图">
+            <button type="button" class="tool" data-act="out" aria-label="缩小">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg>
+            </button>
+            <button type="button" class="tool" data-act="in" aria-label="放大">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M8 3v10"/></svg>
+            </button>
+            <button type="button" class="tool" data-act="reset" aria-label="复位" hidden>
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.2 8.6A5.2 5.2 0 1 1 11.4 4"/><path d="M13.4 2v3h-3"/></svg>
+            </button>
+            <button type="button" class="tool tool--full" data-act="full" aria-label="全屏" aria-pressed="false">
+              <svg class="i-open" viewBox="0 0 16 16" aria-hidden="true"><path d="M6.2 2H2v4.2M9.8 2H14v4.2M6.2 14H2V9.8M9.8 14H14V9.8"/></svg>
+              <svg class="i-close" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6.2h4.2V2M14 6.2H9.8V2M2 9.8h4.2V14M14 9.8H9.8V14"/></svg>
+            </button>
+          </div>
           <svg id="chart" role="img" aria-label="价格与能力分布图"></svg>
           <div class="tip" id="tip" hidden></div>
         </div>
