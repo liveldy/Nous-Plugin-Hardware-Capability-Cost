@@ -1,7 +1,7 @@
-/* 由 tools/snapshot.mjs 生成，勿手改。快照 2026-11-16T11:34:22Z */
+/* 由 tools/snapshot.mjs 生成，勿手改。快照 2026-11-17T11:59:30Z */
 window.HARDWARE_SNAPSHOT = {
  "schema": "hardware-snapshot/1",
- "generatedAt": "2026-11-16T11:34:22Z",
+ "generatedAt": "2026-11-17T11:59:30Z",
  "source": "tools/reference-scores.json",
  "cpu": {
   "metric": "Cinebench R23 多核",
